@@ -1,0 +1,63 @@
+<div class="bg-white rounded-xl shadow-lg border-2 border-slate-100 p-6 space-y-6" id="tour-upload-section">
+    <div class="flex items-center gap-2">
+        <lucide-icon name="upload" class="w-5 h-5 text-blue-600"></lucide-icon>
+        <h2 class="text-xl font-bold text-slate-800">Upload Cycle Calendar</h2>
+    </div>
+    <p class="text-sm text-slate-500">Select a client, download the template, and upload your completed cycle calendar.
+    </p>
+
+    <!-- Client Selection -->
+    <div class="space-y-2">
+        <div class="flex justify-between items-center">
+            <label class="text-sm font-medium" for="client-select">Select Client</label>
+            <button (click)="handleDownloadTemplate()"
+                class="text-blue-600 hover:text-blue-700 hover:bg-blue-50 px-2 py-1 rounded text-xs flex items-center gap-1"
+                id="tour-download-btn">
+                <lucide-icon name="download" class="w-3 h-3"></lucide-icon>
+                Download Template
+            </button>
+        </div>
+        <select id="client-select" [ngModel]="selectedClient()" (ngModelChange)="selectedClient.set($event)"
+            class="w-full p-2 border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="" disabled selected>Select Client to upload for...</option>
+            <option *ngFor="let c of clients" [value]="c.name">{{c.name}}</option>
+        </select>
+    </div>
+
+    <!-- Upload Section -->
+    <div class="space-y-2" id="tour-dropzone">
+        <label class="text-sm font-medium">Upload Completed File</label>
+        <div class="border-2 border-dashed rounded-lg p-8 flex flex-col items-center justify-center text-center transition-all cursor-pointer"
+            [ngClass]="selectedFile() ? 'border-green-500 bg-green-50' : 'border-slate-200 hover:border-blue-400 hover:bg-slate-50'"
+            (click)="fileInput.click()">
+            <input #fileInput type="file" class="hidden" accept=".xlsx, .xls" (change)="handleFileChange($event)" />
+            <ng-container *ngIf="selectedFile(); else noFile">
+                <lucide-icon name="file-spreadsheet" class="w-10 h-10 text-green-600 mb-2"></lucide-icon>
+                <span class="text-green-800 font-medium">{{selectedFile()?.name}}</span>
+                <span class="text-xs text-green-600">Click to change</span>
+            </ng-container>
+            <ng-template #noFile>
+                <lucide-icon name="upload" class="w-10 h-10 text-slate-300 mb-2"></lucide-icon>
+                <span class="text-slate-600 font-medium">Click to Upload</span>
+                <span class="text-xs text-slate-400">Excel files only (.xlsx)</span>
+            </ng-template>
+        </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div *ngIf="uploading()" class="space-y-1">
+        <div class="flex justify-between text-xs text-slate-500">
+            <span>Processing...</span>
+            <span>{{progress()}}%</span>
+        </div>
+        <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+            <div class="h-full bg-blue-600 transition-all duration-300" [style.width.%]="progress()"></div>
+        </div>
+    </div>
+
+    <button (click)="handleUpload()"
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-lg shadow-md transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+        [disabled]="!selectedFile() || !selectedClient() || uploading()" id="tour-upload-btn">
+        {{uploading() ? 'Uploading...' : 'Process Calendar'}}
+    </button>
+</div>

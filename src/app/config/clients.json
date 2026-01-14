@@ -1,0 +1,60 @@
+{
+    "clients": [
+        {
+            "id": "PHT",
+            "name": "PHT"
+        },
+        {
+            "id": "CLIENT_A",
+            "name": "Client A"
+        },
+        {
+            "id": "CLIENT_B",
+            "name": "Client B"
+        },
+        {
+            "id": "CLIENT_C",
+            "name": "Client C"
+        },
+        {
+            "id": "CLIENT_D",
+            "name": "Client D"
+        },
+        {
+            "id": "CLIENT_E",
+            "name": "Client E"
+        },
+        {
+            "id": "CLIENT_F",
+            "name": "Client F"
+        },
+        {
+            "id": "CLIENT_G",
+            "name": "Client G"
+        },
+        {
+            "id": "CLIENT_H",
+            "name": "Client H"
+        },
+        {
+            "id": "CLIENT_I",
+            "name": "Client I"
+        },
+        {
+            "id": "CLIENT_J",
+            "name": "Client J"
+        },
+        {
+            "id": "CLIENT_K",
+            "name": "Client K"
+        },
+        {
+            "id": "CLIENT_L",
+            "name": "Client L"
+        },
+        {
+            "id": "CLIENT_M",
+            "name": "Client M"
+        }
+    ]
+}

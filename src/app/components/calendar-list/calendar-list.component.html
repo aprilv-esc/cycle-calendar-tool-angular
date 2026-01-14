@@ -1,0 +1,67 @@
+<div class="bg-white rounded-xl shadow-md border border-slate-100 p-6 space-y-4" id="tour-calendar-list">
+    <div class="flex items-center gap-2">
+        <lucide-icon name="calendar" class="w-5 h-5 text-purple-600"></lucide-icon>
+        <h2 class="text-lg font-bold text-slate-800">Processed Calendars</h2>
+    </div>
+    <p class="text-sm text-slate-500">Overview of uploaded cycle calendars</p>
+
+    <div *ngIf="loading()" class="text-center py-8 text-slate-500">
+        Loading calendars...
+    </div>
+
+    <div *ngIf="!loading() && calendars().length === 0"
+        class="text-center py-8 text-slate-400 italic bg-slate-50 rounded-lg border border-dashed">
+        No calendars processed yet. Upload one above!
+    </div>
+
+    <div *ngIf="!loading() && calendars().length > 0" class="overflow-x-auto rounded-md border border-slate-200">
+        <table class="w-full text-left">
+            <thead class="bg-slate-50 border-b border-slate-200">
+                <tr>
+                    <th class="p-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">ID</th>
+                    <th class="p-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Client / Code</th>
+                    <th class="p-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Year</th>
+                    <th class="p-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Cycles</th>
+                    <th class="p-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Uploaded</th>
+                    <th class="p-3 text-xs font-semibold text-slate-500 uppercase tracking-wider text-right">Action</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+                <tr *ngFor="let cal of calendars()" class="hover:bg-slate-50/50 transition-colors">
+                    <td class="p-3 font-mono text-xs text-slate-500">#{{cal.header_id}}</td>
+                    <td class="p-3">
+                        <div class="flex flex-col">
+                            <span class="font-semibold text-slate-700">{{cal.client?.name || 'Unknown'}}</span>
+                            <span class="text-xs text-slate-400 font-mono">{{cal.cycle_code}}</span>
+                        </div>
+                    </td>
+                    <td class="p-3 text-sm text-slate-600">{{cal.year}}</td>
+                    <td class="p-3">
+                        <span
+                            class="px-2 py-1 bg-slate-100 rounded text-xs font-mono text-slate-700">{{cal.cycles}}</span>
+                    </td>
+                    <td class="p-3 text-sm text-slate-500">
+                        <div class="flex items-center gap-1">
+                            <lucide-icon name="clock" class="w-3 h-3"></lucide-icon>
+                            {{cal.uploaded_date | date:'MMM d, yyyy HH:mm'}}
+                        </div>
+                    </td>
+                    <td class="p-3 text-right">
+                        <div class="flex gap-2 justify-end">
+                            <button (click)="viewDetails(cal.header_id)"
+                                class="flex items-center gap-1 px-2 py-1 border border-slate-200 rounded text-xs hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all">
+                                <lucide-icon name="eye" class="w-3 h-3"></lucide-icon>
+                                View
+                            </button>
+                            <button (click)="deleteCalendar(cal.header_id)"
+                                class="flex items-center gap-1 px-2 py-1 bg-red-50 text-red-600 rounded text-xs hover:bg-red-600 hover:text-white transition-all">
+                                <lucide-icon name="trash-2" class="w-3 h-3"></lucide-icon>
+                                Delete
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

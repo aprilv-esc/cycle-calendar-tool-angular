@@ -1,0 +1,27 @@
+<main class="min-h-screen p-8 max-w-[1600px] mx-auto space-y-8 font-sans">
+  <header class="flex justify-between items-center pb-6 border-b border-slate-200">
+    <div>
+      <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
+        Cycle Calendar Tool (Angular)
+      </h1>
+      <p class="text-slate-500 mt-1">Internal tool for managing cycle calendars</p>
+    </div>
+    <!-- HelpGuide will go here if implemented -->
+    <div class="flex items-center gap-2">
+      <span class="text-xs text-slate-400 bg-slate-100 px-2 py-1 rounded">Angular v19</span>
+    </div>
+  </header>
+
+  <div class="flex flex-col lg:flex-row gap-8 items-start">
+    <div class="w-full lg:w-96 shrink-0">
+      <app-upload-flow (uploadSuccess)="refreshTable()"></app-upload-flow>
+    </div>
+    <div class="flex-1 min-w-0">
+      <app-calendar-list [refreshTrigger]="refreshTrigger()"></app-calendar-list>
+    </div>
+  </div>
+
+  <footer class="text-center text-slate-400 text-xs py-8 border-t border-slate-100">
+    &copy; 2026 Internal Support Tool. All rights reserved.
+  </footer>
+</main>

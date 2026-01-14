@@ -1,0 +1,48 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Client {
+  id        Int                   @id @default(autoincrement())
+  name      String                @unique
+  headers   CycleCalendarHeader[]
+}
+
+model CycleCalendarHeader {
+  header_id     Int                   @id @default(autoincrement())
+  cycle_code    String                @unique
+  year          Int
+  cycles        Int
+  uploaded_date DateTime              @default(now())
+  uploaded_by   String
+  
+  // Relations
+  client_id     Int?
+  client        Client?               @relation(fields: [client_id], references: [id])
+  details       CycleCalendarDetail[]
+}
+
+model CycleCalendarDetail {
+  cycle_calendar_id Int                 @id @default(autoincrement())
+  mcp_date          DateTime
+  cycle_number      Int
+  header_id         Int
+  type              String
+  zone              Int
+  plot_flag         Int
+  version           Int                 @default(1)
+  modified_date     DateTime            @updatedAt
+  modified_by       String
+  
+  header            CycleCalendarHeader @relation(fields: [header_id], references: [header_id], onDelete: Cascade)
+
+  @@unique([header_id, mcp_date]) // Ensure dates are unique within a calendar
+}
