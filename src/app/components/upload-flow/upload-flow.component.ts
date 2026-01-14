@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CalendarService } from '../../services/calendar.service';
 import clientData from '../../config/clients.json';
+import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
     selector: 'app-upload-flow',
     standalone: true,
-    imports: [CommonModule, FormsModule],
+    imports: [CommonModule, FormsModule, LucideAngularModule],
     templateUrl: './upload-flow.component.html',
 })
 export class UploadFlowComponent {
