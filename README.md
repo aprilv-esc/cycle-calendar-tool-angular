@@ -1,59 +1,59 @@
-# CycleCalendarToolAngular
+# Cycle Calendar Tool - Angular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.5.
+This is an Angular v19 conversion of the Cycle Calendar Tool, featuring modern Angular features like Signals and standalone components, with an Express backend for API handling.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- **Angular v19** with Signals and standalone components
+- **Express Backend** with Prisma ORM for database operations
+- **Excel File Upload** with robust parsing logic
+- **Tailwind CSS v4** for modern, responsive UI
+- **Vercel-Ready** with serverless API configuration
 
+## Local Development
+
+### Prerequisites
+- Node.js 18+
+- PostgreSQL database
+- npm or yarn
+
+### Setup
+
+1. Install dependencies:
 ```bash
-ng serve
+npm install
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+2. Set up environment variables:
 ```bash
-ng generate component component-name
+cp .env.example .env
+# Edit .env and add your DATABASE_URL
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
+3. Generate Prisma client:
 ```bash
-ng generate --help
+npx prisma generate
+npx prisma db push
 ```
 
-## Building
-
-To build the project run:
-
+4. Start the backend server:
 ```bash
-ng build
+node server.js
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
+5. Start the Angular dev server (in a new terminal):
 ```bash
-ng test
+npm run start
 ```
 
-## Running end-to-end tests
+## Deployment
 
-For end-to-end (e2e) testing, run:
+This project is configured for Vercel deployment. See the [walkthrough](docs/walkthrough.md) for detailed deployment instructions.
 
-```bash
-ng e2e
-```
+## GitHub Repository
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+https://github.com/aprilv-esc/cycle-calendar-tool-angular
 
-## Additional Resources
+## License
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Internal tool - All rights reserved
